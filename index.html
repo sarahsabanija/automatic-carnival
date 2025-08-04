@@ -1,15 +1,171 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Welcome!</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sarah's Shopping List</title>
   <style>
-    body { font-family: sans-serif; text-align: center; padding: 50px; }
+    :root {
+      --bg-color: #ffe6f0;
+      --text-color: #333;
+      --item-bg: #fff;
+      --accent-color: #c94f7c;
+      --shadow: rgba(0, 0, 0, 0.1);
+    }
+
+    body.dark {
+      --bg-color: #2e2e2e;
+      --text-color: #eee;
+      --item-bg: #444;
+      --accent-color: #ff80ab;
+      --shadow: rgba(0, 0, 0, 0.3);
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    header {
+      text-align: center;
+      margin: 60px 20px 20px 20px;
+    }
+
+    h1 {
+      font-size: 3em;
+      margin: 0;
+      color: var(--accent-color);
+    }
+
+    p.subtitle {
+      font-size: 1.2em;
+      margin-top: 10px;
+      max-width: 500px;
+    }
+
+    .controls {
+      margin-top: 20px;
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    select, button {
+      padding: 8px 15px;
+      font-size: 1em;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+    }
+
+    button {
+      background-color: var(--accent-color);
+      color: white;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+      margin-top: 30px;
+      width: 90%;
+      max-width: 600px;
+    }
+
+    li {
+      background-color: var(--item-bg);
+      margin: 10px 0;
+      padding: 15px 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px var(--shadow);
+      transition: transform 0.2s ease;
+    }
+
+    li:hover {
+      transform: scale(1.02);
+    }
+
+    a {
+      color: var(--accent-color);
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      margin-top: 60px;
+      padding: 20px;
+      font-size: 0.9em;
+      color: var(--text-color);
+    }
+
+    .hidden {
+      display: none;
+    }
   </style>
 </head>
 <body>
-  <h1>Hello 👋</h1>
-  <p>Thanks for showing interest in buying something for me!</p>
-  <p><a href="https://yourlink.com">Click here to learn more</a></p>
+
+  <header>
+    <h1>Sarah's Shopping List</h1>
+    <p class="subtitle">For the lovely people who don't know what to buy me but want to get inspired 🛍️💖</p>
+  </header>
+
+  <div class="controls">
+    <select id="priceFilter">
+      <option value="all">Show all</option>
+      <option value="under20">Under €20</option>
+      <option value="20to50">€20–€50</option>
+      <option value="over50">Over €50</option>
+    </select>
+    <button id="toggleDarkMode">Toggle Dark Mode</button>
+  </div>
+
+  <ul id="itemList">
+    <li data-price="69,95"><a href="https://barista-essentials.nl/ultimate-brew-giftset/" target="_blank">✨ Ultimate Brew Giftset (€69,95)</a></li>
+    <li data-price="9,49"><a href="https://www.bol.com/nl/nl/p/the-seven-year-slip/9300000138764320/?bltgh=qri-CgNVuk88lnHd40tOpw.6_20.66.ProductTitle" target="_blank">📚 That book I keep talking about (€9,49)</a></li>
+  </ul>
+
+  <footer>
+    Made with love by Sarah 💕
+  </footer>
+
+  <script>
+    const filterSelect = document.getElementById('priceFilter');
+    const itemList = document.getElementById('itemList');
+    const toggleBtn = document.getElementById('toggleDarkMode');
+
+    filterSelect.addEventListener('change', () => {
+      const value = filterSelect.value;
+      const items = itemList.querySelectorAll('li');
+
+      items.forEach(item => {
+        const price = parseFloat(item.getAttribute('data-price'));
+        let show = false;
+
+        if (value === 'all') show = true;
+        else if (value === 'under20' && price < 20) show = true;
+        else if (value === '20to50' && price >= 20 && price <= 50) show = true;
+        else if (value === 'over50' && price > 50) show = true;
+
+        item.classList.toggle('hidden', !show);
+      });
+    });
+
+    toggleBtn.addEventListener('click', () => {
+      document.body.classList.toggle('dark');
+    });
+  </script>
+
 </body>
 </html>
