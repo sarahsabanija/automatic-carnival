@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Sarah's wishlist</title>
+  <title>Sarah's Wishlist</title>
   <style>
     :root {
       --bg-color: #ffe6f0;
@@ -51,7 +51,7 @@
     }
 
     .controls {
-      margin-top: 20px;
+      margin: 30px 0 10px;
       display: flex;
       gap: 15px;
       flex-wrap: wrap;
@@ -71,12 +71,22 @@
       color: white;
     }
 
+    section {
+      margin-top: 40px;
+      width: 100%;
+      max-width: 800px;
+      padding: 0 20px;
+    }
+
+    h2 {
+      border-bottom: 2px solid var(--accent-color);
+      padding-bottom: 5px;
+    }
+
     ul {
       list-style-type: none;
       padding: 0;
-      margin-top: 30px;
-      width: 90%;
-      max-width: 600px;
+      margin-top: 20px;
     }
 
     li {
@@ -102,73 +112,168 @@
       text-decoration: underline;
     }
 
+    .hidden {
+      display: none;
+    }
+
     footer {
       margin-top: 60px;
       padding: 20px;
       font-size: 0.9em;
       color: var(--text-color);
     }
-
-    .hidden {
-      display: none;
-    }
   </style>
 </head>
 <body>
 
   <header>
-    <h1>Sarah's wishlist</h1>
-    <p class="subtitle">For the lovely people who don't know what to buy me - buy me this</p>
+    <h1>Sarah's Wishlist</h1>
+    <p class="subtitle">For the lovely people who don't know what to buy me – here’s some inspiration 🎁</p>
   </header>
 
   <div class="controls">
-    <select id="priceFilter">
-      <option value="all">Show all</option>
-      <option value="under20">Under €20</option>
-      <option value="20to50">€20–€50</option>
-      <option value="over50">Over €50</option>
-    </select>
+    <label>
+      Category:
+      <select id="categoryFilter">
+        <option value="all">All Categories</option>
+        <option value="books">Books</option>
+        <option value="kitchen">Kitchen</option>
+        <option value="home">Home Accessories</option>
+        <option value="personal">Personal Care</option>
+      </select>
+    </label>
+
+    <label>
+      Subcategory:
+      <select id="subcategoryFilter">
+        <option value="all">All</option>
+      </select>
+    </label>
+
+    <label>
+      Price:
+      <select id="priceFilter">
+        <option value="all">All Prices</option>
+        <option value="under20">Under €20</option>
+        <option value="20to50">€20–€50</option>
+        <option value="over50">Over €50</option>
+      </select>
+    </label>
+
     <button id="toggleDarkMode">Dark Mode</button>
   </div>
 
-  <ul id="itemList">
-    <li data-price="69.95"><a href="https://barista-essentials.nl/ultimate-brew-giftset/" target="_blank">Ultimate Brew Giftset (€69,95)</a></li>
-    <li data-price="9.49"><a href="https://www.bol.com/nl/nl/p/the-seven-year-slip/9300000138764320/" target="_blank">The Seven Year Slip (€9,49)</a></li>
-    <li data-price="22.00"><a href="https://www.debijenkorf.nl/wmf-nootmuskaatmolen-19-cm-3059090541-305909054100000" target="_blank">Nootmuskaatmolen 19 cm (€22)</a></li>
-    <li data-price="9.95"><a href="https://www.debijenkorf.nl/patisse-prima-line-truffel-en-chocolade-schaaf-6863090130-686309013000000" target="_blank">Patisse Prima-Line truffel en chocolade schaaf (€9,95)</a></li>
-    <li data-price="110.00"><a href="https://www.debijenkorf.nl/polspotten-lily-kandelaar-15-cm-6722090094-672209009400000" target="_blank">Lily kandelaar 15 cm (€110)</a></li>
-    <li data-price="240.00"><a href="https://www.debijenkorf.nl/matiere-premiere-vanilla-powder-eau-de-parfum-6067090014-606709001426100" target="_blank">Matiere Premiere Vanilla Powder Eau De Parfum (€240)</a></li>
-  </ul>
-  
+  <section>
+    <ul id="itemList">
+      <!-- Books -->
+      <li data-category="books" data-subcategory="fiction" data-price="9.49">
+        <a href="https://www.bol.com/nl/nl/p/the-seven-year-slip/9300000138764320/" target="_blank">
+          The Seven Year Slip – Fiction (€9.49)
+        </a>
+      </li>
+      <li data-category="books" data-subcategory="non-fiction" data-price="24.00">
+        <a href="https://example.com/nonfiction-book" target="_blank">
+          Atomic Habits – Non-Fiction (€24.00)
+        </a>
+      </li>
+
+      <!-- Kitchen -->
+      <li data-category="kitchen" data-subcategory="utensils" data-price="9.95">
+        <a href="https://www.debijenkorf.nl/patisse-prima-line-truffel-en-chocolade-schaaf-6863090130-686309013000000" target="_blank">
+          Chocolate Shaver (€9.95)
+        </a>
+      </li>
+      <li data-category="kitchen" data-subcategory="gadgets" data-price="22.00">
+        <a href="https://www.debijenkorf.nl/wmf-nootmuskaatmolen-19-cm-3059090541-305909054100000" target="_blank">
+          Nutmeg Grinder (€22.00)
+        </a>
+      </li>
+
+      <!-- Home Accessories -->
+      <li data-category="home" data-subcategory="coffee" data-price="69.95">
+        <a href="https://barista-essentials.nl/ultimate-brew-giftset/" target="_blank">
+          Ultimate Brew Giftset (€69.95)
+        </a>
+      </li>
+
+      <!-- Personal Care -->
+      <li data-category="personal" data-subcategory="fragrance" data-price="240.00">
+        <a href="https://www.debijenkorf.nl/matiere-premiere-vanilla-powder-eau-de-parfum-6067090014-606709001426100" target="_blank">
+          Vanilla Powder Eau De Parfum (€240.00)
+        </a>
+      </li>
+    </ul>
+  </section>
+
   <footer>
-    Made with love
+    Made with care 💕
   </footer>
 
   <script>
-    const filterSelect = document.getElementById('priceFilter');
+    const categoryFilter = document.getElementById('categoryFilter');
+    const subcategoryFilter = document.getElementById('subcategoryFilter');
+    const priceFilter = document.getElementById('priceFilter');
     const itemList = document.getElementById('itemList');
     const toggleBtn = document.getElementById('toggleDarkMode');
 
-    filterSelect.addEventListener('change', () => {
-      const value = filterSelect.value;
-      const items = itemList.querySelectorAll('li');
+    const subcategories = {
+      books: ['fiction', 'non-fiction'],
+      kitchen: ['utensils', 'gadgets'],
+      home: ['coffee'],
+      personal: ['fragrance']
+    };
 
-      items.forEach(item => {
-        const price = parseFloat(item.getAttribute('data-price'));
-        let show = false;
+    // Update subcategory dropdown when category changes
+    categoryFilter.addEventListener('change', () => {
+      const selectedCategory = categoryFilter.value;
+      subcategoryFilter.innerHTML = '<option value="all">All</option>';
 
-        if (value === 'all') show = true;
-        else if (value === 'under20' && price < 20) show = true;
-        else if (value === '20to50' && price >= 20 && price <= 50) show = true;
-        else if (value === 'over50' && price > 50) show = true;
+      if (subcategories[selectedCategory]) {
+        subcategories[selectedCategory].forEach(sub => {
+          const opt = document.createElement('option');
+          opt.value = sub;
+          opt.textContent = sub.charAt(0).toUpperCase() + sub.slice(1);
+          subcategoryFilter.appendChild(opt);
+        });
+      }
 
-        item.classList.toggle('hidden', !show);
-      });
+      filterItems();
     });
+
+    subcategoryFilter.addEventListener('change', filterItems);
+    priceFilter.addEventListener('change', filterItems);
 
     toggleBtn.addEventListener('click', () => {
       document.body.classList.toggle('dark');
     });
+
+    function filterItems() {
+      const category = categoryFilter.value;
+      const subcategory = subcategoryFilter.value;
+      const price = priceFilter.value;
+
+      const items = itemList.querySelectorAll('li');
+
+      items.forEach(item => {
+        const itemCategory = item.getAttribute('data-category');
+        const itemSub = item.getAttribute('data-subcategory');
+        const itemPrice = parseFloat(item.getAttribute('data-price'));
+
+        let visible = true;
+
+        if (category !== 'all' && itemCategory !== category) visible = false;
+        if (subcategory !== 'all' && itemSub !== subcategory) visible = false;
+
+        if (price === 'under20' && itemPrice >= 20) visible = false;
+        if (price === '20to50' && (itemPrice < 20 || itemPrice > 50)) visible = false;
+        if (price === 'over50' && itemPrice <= 50) visible = false;
+
+        item.classList.toggle('hidden', !visible);
+      });
+    }
+
+    // Initial filter to show all
+    filterItems();
   </script>
 
 </body>
