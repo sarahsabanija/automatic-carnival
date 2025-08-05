@@ -144,9 +144,11 @@
 </head>
 <body>
   <header>
-    <h1>Sarah's Wishlist</h1>
-    <p class="subtitle">A curated list of gift ideas for your person of interest, me.</p>
-  </header>
+  <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.rawpixel.com%2Fsearch%2Fsimple%2520header&psig=AOvVaw3LHWEXvzlAExZFbAHDVjlw&ust=1754506488082000&source=images&cd=vfe&opi=89978449&ved=0CBUQjRxqFwoTCODRuJOs9I4DFQAAAAAdAAAAABAE.jpg" alt="Wishlist Banner" style="max-width: 200px; height: auto; margin-bottom: 20px;" />
+  <h1>Sarah's Wishlist</h1>
+  <p class="subtitle">For the lovely people who don't know what to buy me – pick from this list</p>
+</header>
+
 
   <div class="controls">
     <label>
@@ -177,7 +179,7 @@
       </select>
     </label>
 
-    <button id="toggleDarkMode">Toggle Dark Mode</button>
+    <button id="toggleDarkMode">Dark Mode</button>
   </div>
 
   <section>
@@ -188,9 +190,9 @@
           The Seven Year Slip – Fiction (€9.49)
         </a>
       </li>
-      <li data-category="books" data-subcategory="non-fiction" data-price="29.61">
+      <li data-category="books" data-subcategory="historical fiction" data-price="29.61">
         <a href="https://www.bol.com/nl/nl/p/11-22-63/9200000002629638/?bltgh=t-S-4fCCU4WZAQhj4YRGCw.m7rHmVDz0QY-EVHLrwBG8w_0_21.24.RollupItem" target="_blank">
-          11/22/63 – Non-Fiction (€29.61)
+          11/22/63 – Historical Fiction (€29.61)
         </a>
       </li>
        <li data-category="books" data-subcategory="fiction" data-price="7.49">
@@ -279,7 +281,7 @@
     const toggleBtn = document.getElementById('toggleDarkMode');
 
     const subcategories = {
-      books: ['fiction', 'non-fiction'],
+      books: ['fiction', 'non-fiction', 'historical fiction'],
       kitchen: ['utensils', 'teas and coffees', 'baking', 'pots and pans'],
       home: ['vases', 'other'],
       personal: ['fragrances', 'other']
