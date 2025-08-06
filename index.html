@@ -157,6 +157,7 @@
         <option value="kitchen">Kitchen</option>
         <option value="home">Home Accessories</option>
         <option value="personal">Personal Care</option>
+       <option value="travel">Travel</option>
       </select>
     </label>
 
@@ -264,6 +265,18 @@
           Vanilla Powder Eau De Parfum (€240.00)
         </a>
       </li>
+     
+      <!-- Travel -->
+     <li data-category="travel" data-subcategory="suitcases" data-price="750.00">
+        <a href="https://www.rimowa.com/fi/en/luggage/colour/slate/cabin/83253831.html" target="_blank">
+          Rimowa Essential Cabin (€750.00)
+        </a>
+      </li>
+     <li data-category="travel" data-subcategory="suitcases" data-price="940.00">
+        <a href="https://www.rimowa.com/fi/en/luggage/colour/grey/check-in-l/83273831.html" target="_blank">
+          Rimowa Essential Check-In L (€940.00)
+        </a>
+      </li>
     </ul>
   </section>  
 
@@ -282,7 +295,8 @@
       books: ['fiction', 'non-fiction', 'historical fiction'],
       kitchen: ['utensils', 'teas and coffees', 'baking', 'pots and pans'],
       home: ['vases', 'other'],
-      personal: ['fragrances', 'other']
+      personal: ['fragrances', 'other'],
+      travel: ['suitcases']
     };
 
     categoryFilter.addEventListener('change', () => {
