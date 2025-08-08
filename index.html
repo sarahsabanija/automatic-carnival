@@ -292,34 +292,39 @@
 
     filterItems();
 
-    // Claim toggle logic with localStorage persistence
-    function initializeClaimButtons() {
-      const buttons = document.querySelectorAll('.claim-btn');
+// Claim toggle logic with localStorage persistence, improved:
+function initializeClaimButtons() {
+  const buttons = document.querySelectorAll('.claim-btn');
 
-      buttons.forEach(button => {
-        const itemText = button.parentElement.querySelector('a').textContent;
+  buttons.forEach(button => {
+    // Use a unique identifier per item (e.g. URL or text) as key:
+    const itemLink = button.parentElement.querySelector('a');
+    const itemKey = 'claimed-' + itemLink.href;
 
-        // Load claim state
-        if (localStorage.getItem(itemText) === 'claimed') {
-          button.textContent = 'Claimed';
-          button.classList.add('claimed');
-        }
-
-        button.addEventListener('click', () => {
-          if (button.classList.contains('claimed')) {
-            // Unclaim
-            button.textContent = 'Claim';
-            button.classList.remove('claimed');
-            localStorage.removeItem(itemText);
-          } else {
-            // Claim
-            button.textContent = 'Claimed';
-            button.classList.add('claimed');
-            localStorage.setItem(itemText, 'claimed');
-          }
-        });
-      });
+    // Load claim state
+    if (localStorage.getItem(itemKey) === 'claimed') {
+      button.textContent = 'Claimed';
+      button.classList.add('claimed');
+    } else {
+      button.textContent = 'Claim';
+      button.classList.remove('claimed');
     }
+
+    button.addEventListener('click', () => {
+      if (button.classList.contains('claimed')) {
+        // Unclaim
+        button.textContent = 'Claim';
+        button.classList.remove('claimed');
+        localStorage.removeItem(itemKey);
+      } else {
+        // Claim
+        button.textContent = 'Claimed';
+        button.classList.add('claimed');
+        localStorage.setItem(itemKey, 'claimed');
+      }
+    });
+  });
+}
 
     initializeClaimButtons();
   </script>
