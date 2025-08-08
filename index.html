@@ -7,78 +7,126 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-color: #f4f7fb;       /* baby blue */
+      --bg-color: #f4f7fb;            /* light corporate blue */
       --text-color: #1c1c1c;
       --item-bg: #ffffff;
-      --accent-color: #5c4d91;   /* deep purple */
+      --accent-color: #5c4d91;        /* deep purple */
       --button-bg: #5c4d91;
       --button-text: #ffffff;
       --shadow: rgba(0, 0, 0, 0.06);
       --border-radius: 8px;
     }
 
+    body.dark {
+      --bg-color: #1a1a2e;
+      --text-color: #f0f0f0;
+      --item-bg: #2a2a3e;
+      --accent-color: #b39ddb;
+      --button-bg: #b39ddb;
+      --button-text: #1a1a2e;
+      --shadow: rgba(0, 0, 0, 0.2);
+    }
+
     body {
       margin: 0;
+      padding: 0;
       font-family: 'Inter', sans-serif;
       background-color: var(--bg-color);
       color: var(--text-color);
-      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: background 0.3s, color 0.3s;
     }
 
     header {
-      padding: 30px;
+      text-align: center;
+      margin: 60px 20px 20px 20px;
     }
 
     h1 {
       font-size: 2.5em;
+      margin-bottom: 10px;
       color: var(--accent-color);
     }
 
     p.subtitle {
-      font-size: 1.2em;
-      margin-top: 5px;
+      font-size: 1em;
+      color: #555;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .controls {
+      margin: 30px 0 10px;
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    select, button {
+      padding: 8px 12px;
+      font-size: 0.95em;
+      border-radius: var(--border-radius);
+      border: 1px solid #ccc;
+      background-color: #fff;
+      color: var(--text-color);
+      outline: none;
+      cursor: pointer;
+    }
+
+    button {
+      background-color: var(--button-bg);
+      color: var(--button-text);
+      border: none;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+    button.claimed {
+      background-color: gray;
+      color: #ddd;
     }
 
     section {
-      margin: 40px auto;
-      max-width: 800px;
-      padding: 20px;
-      background: var(--item-bg);
-      border-radius: var(--border-radius);
-      box-shadow: 0 4px 8px var(--shadow);
+      margin-top: 40px;
+      width: 100%;
+      max-width: 900px;
+      padding: 0 20px;
     }
 
     h2 {
+      font-size: 1.4em;
       color: var(--accent-color);
-    }
-
-    .filters {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin-bottom: 15px;
-    }
-
-    select {
-      padding: 8px;
-      border-radius: var(--border-radius);
-      border: 1px solid #ccc;
+      border-bottom: 2px solid var(--accent-color);
+      padding-bottom: 5px;
     }
 
     ul {
-      list-style: none;
+      list-style-type: none;
       padding: 0;
+      margin-top: 20px;
     }
 
     li {
+      background-color: var(--item-bg);
+      margin: 12px 0;
+      padding: 15px 20px;
+      border-radius: var(--border-radius);
+      box-shadow: 0 2px 4px var(--shadow);
+      transition: transform 0.2s ease;
+      border-left: 4px solid var(--accent-color);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: var(--item-bg);
-      padding: 10px;
-      margin: 5px 0;
-      border-radius: var(--border-radius);
-      box-shadow: 0 2px 4px var(--shadow);
+    }
+
+    li:hover {
+      transform: translateY(-2px);
     }
 
     a {
@@ -87,181 +135,193 @@
       font-weight: 600;
     }
 
-    button.claim-btn {
-      padding: 5px 10px;
-      background: var(--button-bg);
-      color: var(--button-text);
-      border: none;
-      border-radius: var(--border-radius);
-      cursor: pointer;
+    a:hover {
+      text-decoration: underline;
     }
 
-    button.claimed {
-      background: gray;
-      cursor: not-allowed;
+    .hidden {
+      display: none;
+    }
+
+    footer {
+      margin-top: 60px;
+      padding: 20px;
+      font-size: 0.85em;
+      color: #777;
     }
   </style>
 </head>
+
 <body>
-
-<header>
+ <header>
   <h1>Sarah's Wishlist</h1>
-  <p class="subtitle">For the lovely people who don’t know what to buy me – here’s some inspiration!</p>
+  <p class="subtitle">For the lovely people who don't know what to buy me – pick from this list</p>
 </header>
+  
+  <div class="controls">
+    <label>
+      Category:
+      <select id="categoryFilter">
+        <option value="all">All Categories</option>
+        <option value="books">Books</option>
+        <option value="kitchen">Kitchen</option>
+        <option value="home">Home Accessories</option>
+        <option value="personal">Personal Care</option>
+        <option value="travel">Travel</option>
+      </select>
+    </label>
 
-<!-- BOOKS -->
-<section>
-  <h2>Books</h2>
-  <div class="filters">
-    <select id="booksCategoryFilter">
-      <option value="all">All Types</option>
-      <option value="fiction">Fiction</option>
-      <option value="non-fiction">Non-fiction</option>
-    </select>
-    <select id="booksPriceFilter">
-      <option value="all">All Prices</option>
-      <option value="under20">Under €20</option>
-      <option value="20to50">€20–€50</option>
-      <option value="over50">Over €50</option>
-    </select>
+    <label>
+      Subcategory:
+      <select id="subcategoryFilter">
+        <option value="all">All</option>
+      </select>
+    </label>
+
+    <label>
+      Price:
+      <select id="priceFilter">
+        <option value="all">All Prices</option>
+        <option value="under20">Under €20</option>
+        <option value="20to50">€20–€50</option>
+        <option value="over50">Over €50</option>
+      </select>
+    </label>
+
+    <button id="toggleDarkMode">Dark Mode</button>
   </div>
-  <ul id="booksList">
-    <li data-price="9.49" data-category="fiction">
-      <a href="https://www.bol.com/nl/nl/p/the-seven-year-slip/9300000138764320/" target="_blank">The Seven Year Slip (€9,49)</a>
-      <button class="claim-btn">Claim</button>
-    </li>
-  </ul>
-</section>
 
-<!-- KITCHEN -->
-<section>
-  <h2>Kitchen</h2>
-  <div class="filters">
-    <select id="kitchenCategoryFilter">
-      <option value="all">All Types</option>
-      <option value="tools">Tools</option>
-      <option value="appliances">Appliances</option>
-    </select>
-    <select id="kitchenPriceFilter">
-      <option value="all">All Prices</option>
-      <option value="under20">Under €20</option>
-      <option value="20to50">€20–€50</option>
-      <option value="over50">Over €50</option>
-    </select>
-  </div>
-  <ul id="kitchenList">
-    <li data-price="22" data-category="tools">
-      <a href="https://www.debijenkorf.nl/wmf-nootmuskaatmolen-19-cm-3059090541-305909054100000" target="_blank">Nootmuskaatmolen (€22)</a>
-      <button class="claim-btn">Claim</button>
-    </li>
-  </ul>
-</section>
+  <section>
+    <ul id="itemList">
+      <!-- Sample Items -->
+      <li data-category="books" data-subcategory="fiction" data-price="9.49">
+        <a href="https://www.bol.com/nl/nl/p/the-seven-year-slip/9300000138764320/" target="_blank">
+          The Seven Year Slip – Fiction (€9.49)
+        </a>
+        <button class="claim-btn">Claim</button>
+      </li>
+      <li data-category="books" data-subcategory="historical fiction" data-price="29.61">
+        <a href="https://www.bol.com/nl/nl/p/11-22-63/9200000002629638/?bltgh=t-S-4fCCU4WZAQhj4YRGCw.m7rHmVDz0QY-EVHLrwBG8w_0_21.24.RollupItem" target="_blank">
+          11/22/63 – Historical Fiction (€29.61)
+        </a>
+        <button class="claim-btn">Claim</button>
+      </li>
+      <li data-category="kitchen" data-subcategory="utensils" data-price="9.95">
+        <a href="https://www.debijenkorf.nl/patisse-prima-line-truffel-en-chocolade-schaaf-6863090130-686309013000000" target="_blank">
+          Chocolate Shaver (€9.95)
+        </a>
+        <button class="claim-btn">Claim</button>
+      </li>
+      <li data-category="travel" data-subcategory="suitcases" data-price="750.00">
+        <a href="https://www.rimowa.com/fi/en/luggage/colour/slate/cabin/83253831.html" target="_blank">
+          Rimowa Essential Cabin (€750.00)
+        </a>
+        <button class="claim-btn">Claim</button>
+      </li>
+      <!-- Add more items as needed -->
+    </ul>
+  </section>  
 
-<!-- HOME ACCESSORIES -->
-<section>
-  <h2>Home Accessories</h2>
-  <div class="filters">
-    <select id="homeCategoryFilter">
-      <option value="all">All Types</option>
-      <option value="decor">Decor</option>
-      <option value="furniture">Furniture</option>
-    </select>
-    <select id="homePriceFilter">
-      <option value="all">All Prices</option>
-      <option value="under20">Under €20</option>
-      <option value="20to50">€20–€50</option>
-      <option value="over50">Over €50</option>
-    </select>
-  </div>
-  <ul id="homeList">
-    <li data-price="69.95" data-category="decor">
-      <a href="https://barista-essentials.nl/ultimate-brew-giftset/" target="_blank">Ultimate Brew Giftset (€69,95)</a>
-      <button class="claim-btn">Claim</button>
-    </li>
-  </ul>
-</section>
+  <footer>
+    &copy; 2025 Sarah's Wishlist — All rights reserved
+  </footer>
 
-<!-- PERSONAL CARE -->
-<section>
-  <h2>Personal Care</h2>
-  <div class="filters">
-    <select id="careCategoryFilter">
-      <option value="all">All Types</option>
-      <option value="skincare">Skincare</option>
-      <option value="fragrance">Fragrance</option>
-    </select>
-    <select id="carePriceFilter">
-      <option value="all">All Prices</option>
-      <option value="under20">Under €20</option>
-      <option value="20to50">€20–€50</option>
-      <option value="over50">Over €50</option>
-    </select>
-  </div>
-  <ul id="careList">
-    <li data-price="240" data-category="fragrance">
-      <a href="https://www.debijenkorf.nl/matiere-premiere-vanilla-powder-eau-de-parfum-6067090014-606709001426100" target="_blank">Matiere Premiere Vanilla Powder Eau De Parfum (€240)</a>
-      <button class="claim-btn">Claim</button>
-    </li>
-  </ul>
-</section>
+  <script>
+    const categoryFilter = document.getElementById('categoryFilter');
+    const subcategoryFilter = document.getElementById('subcategoryFilter');
+    const priceFilter = document.getElementById('priceFilter');
+    const itemList = document.getElementById('itemList');
+    const toggleBtn = document.getElementById('toggleDarkMode');
 
-<footer>
-  <p>Made with 💜 by Sarah</p>
-</footer>
+    const subcategories = {
+      books: ['fiction', 'non-fiction', 'historical fiction'],
+      kitchen: ['utensils', 'teas and coffees', 'baking', 'pots and pans'],
+      home: ['vases', 'other'],
+      personal: ['fragrances', 'other'],
+      travel: ['suitcases']
+    };
 
-<script>
-  function setupFilter(categorySelectId, priceSelectId, listId) {
-    const categoryFilter = document.getElementById(categorySelectId);
-    const priceFilter = document.getElementById(priceSelectId);
-    const list = document.getElementById(listId);
-    
-    function applyFilter() {
-      const categoryValue = categoryFilter.value;
-      const priceValue = priceFilter.value;
-      const items = list.querySelectorAll('li');
+    // Update subcategory options based on category
+    categoryFilter.addEventListener('change', () => {
+      const selectedCategory = categoryFilter.value;
+      subcategoryFilter.innerHTML = '<option value="all">All</option>';
+
+      if (subcategories[selectedCategory]) {
+        subcategories[selectedCategory].forEach(sub => {
+          const opt = document.createElement('option');
+          opt.value = sub;
+          opt.textContent = sub.charAt(0).toUpperCase() + sub.slice(1);
+          subcategoryFilter.appendChild(opt);
+        });
+      }
+
+      filterItems();
+    });
+
+    subcategoryFilter.addEventListener('change', filterItems);
+    priceFilter.addEventListener('change', filterItems);
+
+    toggleBtn.addEventListener('click', () => {
+      document.body.classList.toggle('dark');
+    });
+
+    function filterItems() {
+      const category = categoryFilter.value;
+      const subcategory = subcategoryFilter.value;
+      const price = priceFilter.value;
+
+      const items = itemList.querySelectorAll('li');
 
       items.forEach(item => {
-        const price = parseFloat(item.getAttribute('data-price'));
-        const category = item.getAttribute('data-category');
-        let show = true;
+        const itemCategory = item.getAttribute('data-category');
+        const itemSub = item.getAttribute('data-subcategory');
+        const itemPrice = parseFloat(item.getAttribute('data-price'));
 
-        if (categoryValue !== 'all' && category !== categoryValue) show = false;
-        if (priceValue === 'under20' && price >= 20) show = false;
-        if (priceValue === '20to50' && (price < 20 || price > 50)) show = false;
-        if (priceValue === 'over50' && price <= 50) show = false;
+        let visible = true;
 
-        item.style.display = show ? '' : 'none';
+        if (category !== 'all' && itemCategory !== category) visible = false;
+        if (subcategory !== 'all' && itemSub !== subcategory) visible = false;
+
+        if (price === 'under20' && itemPrice >= 20) visible = false;
+        if (price === '20to50' && (itemPrice < 20 || itemPrice > 50)) visible = false;
+        if (price === 'over50' && itemPrice <= 50) visible = false;
+
+        item.classList.toggle('hidden', !visible);
       });
     }
 
-    categoryFilter.addEventListener('change', applyFilter);
-    priceFilter.addEventListener('change', applyFilter);
-  }
+    filterItems();
 
-  // Setup filters for each list
-  setupFilter('booksCategoryFilter', 'booksPriceFilter', 'booksList');
-  setupFilter('kitchenCategoryFilter', 'kitchenPriceFilter', 'kitchenList');
-  setupFilter('homeCategoryFilter', 'homePriceFilter', 'homeList');
-  setupFilter('careCategoryFilter', 'carePriceFilter', 'careList');
+    // Claim toggle logic with localStorage persistence
+    function initializeClaimButtons() {
+      const buttons = document.querySelectorAll('.claim-btn');
 
-  // Claim button logic with localStorage
-  document.querySelectorAll('.claim-btn').forEach(button => {
-    const itemText = button.parentElement.querySelector('a').textContent;
+      buttons.forEach(button => {
+        const itemText = button.parentElement.querySelector('a').textContent;
 
-    if (localStorage.getItem(itemText) === 'claimed') {
-      button.textContent = 'Claimed';
-      button.classList.add('claimed');
-      button.disabled = true;
+        // Load claim state
+        if (localStorage.getItem(itemText) === 'claimed') {
+          button.textContent = 'Claimed';
+          button.classList.add('claimed');
+        }
+
+        button.addEventListener('click', () => {
+          if (button.classList.contains('claimed')) {
+            // Unclaim
+            button.textContent = 'Claim';
+            button.classList.remove('claimed');
+            localStorage.removeItem(itemText);
+          } else {
+            // Claim
+            button.textContent = 'Claimed';
+            button.classList.add('claimed');
+            localStorage.setItem(itemText, 'claimed');
+          }
+        });
+      });
     }
 
-    button.addEventListener('click', () => {
-      button.textContent = 'Claimed';
-      button.classList.add('claimed');
-      button.disabled = true;
-      localStorage.setItem(itemText, 'claimed');
-    });
-  });
-</script>
-
+    initializeClaimButtons();
+  </script>
 </body>
 </html>
