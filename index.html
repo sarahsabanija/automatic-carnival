@@ -7,7 +7,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-color: #f4f7fb;            /* light corporate blue */
+      --bg-color: #f4f7fb;            /* light baby blue */
       --text-color: #1c1c1c;
       --item-bg: #ffffff;
       --accent-color: #5c4d91;        /* deep purple */
@@ -18,19 +18,19 @@
     }
 
     body.dark {
-      --bg-color: #1a1a2e;
-      --text-color: #f0f0f0;
-      --item-bg: #2a2a3e;
-      --accent-color: #b39ddb;
-      --button-bg: #b39ddb;
-      --button-text: #1a1a2e;
-      --shadow: rgba(0, 0, 0, 0.2);
+      --bg-color: #2e2e2e;
+      --text-color: #eee;
+      --item-bg: #444;
+      --accent-color: #b8a4f9;
+      --button-bg: #b8a4f9;
+      --button-text: #2e2e2e;
+      --shadow: rgba(0, 0, 0, 0.3);
     }
 
     body {
       margin: 0;
       padding: 0;
-      font-family: 'Inter', sans-serif;
+      font-family: "Inter", sans-serif;
       background-color: var(--bg-color);
       color: var(--text-color);
       display: flex;
@@ -41,24 +41,28 @@
 
     header {
       text-align: center;
-      margin: 60px 20px 20px 20px;
+      margin: 40px 20px 20px 20px;
+    }
+
+    header img {
+      max-width: 150px;
+      margin-bottom: 15px;
     }
 
     h1 {
       font-size: 2.5em;
-      margin-bottom: 10px;
+      margin: 0;
       color: var(--accent-color);
     }
 
     p.subtitle {
-      font-size: 1em;
-      color: #555;
-      max-width: 600px;
-      margin: 0 auto;
+      font-size: 1.1em;
+      margin-top: 10px;
+      max-width: 500px;
     }
 
     .controls {
-      margin: 30px 0 10px;
+      margin-top: 20px;
       display: flex;
       gap: 15px;
       flex-wrap: wrap;
@@ -66,333 +70,206 @@
     }
 
     select, button {
-      padding: 8px 12px;
-      font-size: 0.95em;
+      padding: 8px 15px;
+      font-size: 1em;
       border-radius: var(--border-radius);
-      border: 1px solid #ccc;
-      background-color: #fff;
-      color: var(--text-color);
-      outline: none;
+      border: none;
       cursor: pointer;
     }
 
-    button {
+    button.filter-btn, #toggleDarkMode {
       background-color: var(--button-bg);
       color: var(--button-text);
-      border: none;
-      transition: background-color 0.3s ease;
-    }
-
-    button:hover {
-      opacity: 0.9;
-    }
-
-    button.claimed {
-      background-color: gray;
-      color: #ddd;
-    }
-
-    section {
-      margin-top: 40px;
-      width: 100%;
-      max-width: 900px;
-      padding: 0 20px;
-    }
-
-    h2 {
-      font-size: 1.4em;
-      color: var(--accent-color);
-      border-bottom: 2px solid var(--accent-color);
-      padding-bottom: 5px;
     }
 
     ul {
       list-style-type: none;
       padding: 0;
-      margin-top: 20px;
+      margin-top: 30px;
+      width: 90%;
+      max-width: 600px;
     }
 
     li {
       background-color: var(--item-bg);
-      margin: 12px 0;
+      margin: 10px 0;
       padding: 15px 20px;
       border-radius: var(--border-radius);
-      box-shadow: 0 2px 4px var(--shadow);
+      box-shadow: 0 4px 6px var(--shadow);
       transition: transform 0.2s ease;
-      border-left: 4px solid var(--accent-color);
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
 
     li:hover {
-      transform: translateY(-2px);
+      transform: scale(1.02);
     }
 
     a {
       color: var(--accent-color);
       text-decoration: none;
-      font-weight: 600;
+      font-weight: bold;
     }
 
     a:hover {
       text-decoration: underline;
     }
 
-    .hidden {
-      display: none;
+    .claim-btn {
+      margin-left: 15px;
+      padding: 6px 12px;
+      border-radius: var(--border-radius);
+      background: var(--accent-color);
+      color: white;
+    }
+
+    .claim-btn.claimed {
+      background: gray;
     }
 
     footer {
       margin-top: 60px;
       padding: 20px;
-      font-size: 0.85em;
-      color: #777;
+      font-size: 0.9em;
+      color: var(--text-color);
+    }
+
+    .hidden {
+      display: none;
     }
   </style>
 </head>
-
 <body>
- <header>
-  <h1>Sarah's Wishlist</h1>
-  <p class="subtitle">For the lovely people who don't know what to buy me – pick from this list</p>
-</header>
-  
+
+  <header>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Cute_Pink_Heart.svg/768px-Cute_Pink_Heart.svg.png" alt="Heart">
+    <h1>Sarah's Wishlist</h1>
+    <p class="subtitle">For the lovely people who don't know what to buy me - buy me this 💜</p>
+  </header>
+
   <div class="controls">
-    <label>
-      Category:
-      <select id="categoryFilter">
-        <option value="all">All Categories</option>
-        <option value="books">Books</option>
-        <option value="kitchen">Kitchen</option>
-        <option value="home">Home Accessories</option>
-        <option value="personal">Personal Care</option>
-        <option value="travel">Travel</option>
-      </select>
-    </label>
+    <select id="categoryFilter">
+      <option value="all">All categories</option>
+      <option value="books">Books</option>
+      <option value="kitchen">Kitchen</option>
+      <option value="home">Home Accessories</option>
+      <option value="personal">Personal Care</option>
+    </select>
 
-    <label>
-      Subcategory:
-      <select id="subcategoryFilter">
-        <option value="all">All</option>
-      </select>
-    </label>
-
-    <label>
-      Price:
-      <select id="priceFilter">
-        <option value="all">All Prices</option>
-        <option value="under20">Under €20</option>
-        <option value="20to50">€20–€50</option>
-        <option value="over50">Over €50</option>
-      </select>
-    </label>
+    <select id="priceFilter">
+      <option value="all">All prices</option>
+      <option value="under20">Under €20</option>
+      <option value="20to50">€20–€50</option>
+      <option value="over50">Over €50</option>
+    </select>
 
     <button id="toggleDarkMode">Dark Mode</button>
   </div>
 
-   <section>
-    <ul id="itemList">
-      <!-- Books -->
-      <li data-category="books" data-subcategory="fiction" data-price="9.49">
-        <a href="https://www.bol.com/nl/nl/p/the-seven-year-slip/9300000138764320/" target="_blank">
-          The Seven Year Slip – Fiction (€9.49)
-        </a>
-      </li>
-      <li data-category="books" data-subcategory="historical fiction" data-price="29.61">
-        <a href="https://www.bol.com/nl/nl/p/11-22-63/9200000002629638/?bltgh=t-S-4fCCU4WZAQhj4YRGCw.m7rHmVDz0QY-EVHLrwBG8w_0_21.24.RollupItem" target="_blank">
-          11/22/63 – Historical Fiction (€29.61)
-        </a>
-      </li>
-       <li data-category="books" data-subcategory="fiction" data-price="7.49">
-        <a href="https://www.bol.com/nl/nl/p/frankenstein/1001004011812402/?bltgh=tANxx9AbBfJonC68XplBWw.4_20.21.ProductTitle" target="_blank">
-          Frankenstein – Fiction (€7.49)
-        </a>
-      </li>
-      
-      <!-- Kitchen -->
-      <li data-category="kitchen" data-subcategory="utensils" data-price="9.95">
-        <a href="https://www.debijenkorf.nl/patisse-prima-line-truffel-en-chocolade-schaaf-6863090130-686309013000000" target="_blank">
-          Chocolate Shaver (€9.95)
-        </a>
-      </li>
-      <li data-category="kitchen" data-subcategory="utensils" data-price="22.00">
-        <a href="https://www.debijenkorf.nl/wmf-nootmuskaatmolen-19-cm-3059090541-305909054100000" target="_blank">
-          Nutmeg Grinder (€22.00)
-        </a>
-      </li>
-      <li data-category="kitchen" data-subcategory="teas and coffees" data-price="69.95">
-        <a href="https://barista-essentials.nl/ultimate-brew-giftset/" target="_blank">
-          Ultimate Brew Giftset (€69.95)
-        </a>
-         </li>
-      <li data-category="kitchen" data-subcategory="teas and coffees" data-price="96.99">
-        <a href="https://avantcha.com/en-EU/products/ceremonial-matcha-gift-set" target="_blank">
-          Ceremonial Matcha Gift Set (€96.00)
-        </a>
-      </li>
-      <li data-category="kitchen" data-subcategory="teas and coffees" data-price="12.95">
-        <a href="https://www.debijenkorf.nl/yoisho-matcha-matcha-garde-houder-7312090069-731209006900000?query=fh_location%3D%2F%2Fcatalog01%2Fnl_NL%2Fnieuw_nonfashion%3E%7Bnet20binnen%7D%2Fcategories%3C%7Bcatalog01_120%7D%26fh_start_index%3D768%26tsm%3D2" target="_blank">
-          Yoisho Matcha Matcha garde houder (€12.95)
-        </a>
-        </li>
-      <li data-category="kitchen" data-subcategory="baking" data-price="12.95">
-        <a href="https://www.debijenkorf.nl/point-virgule-siliconen-bakvorm-voor-madeleines-9-vaks-8278090185-827809018555090?query=fh_location%3D%2F%2Fcatalog01%2Fnl_NL%2Fnieuw_nonfashion%3E%7Bnet20binnen%7D%2Fcategories%3C%7Bcatalog01_120%7D%26fh_start_index%3D240%26tsm%3D2" target="_blank">
-          Point-Virgule Siliconen bakvorm voor madeleines 9-vaks (€12.95)
-        </a>
-        </li>
-       <li data-category="kitchen" data-subcategory="pots and pans" data-price="265.00">
-        <a href="https://www.debijenkorf.nl/le-creuset-signature-braad-stoofpan-20-cm-6577090602-657709060291020?query=fh_location%3D%2F%2Fcatalog01%2Fnl_NL%2Fbrand%3E%7Ble_creuset%7D%26fh_start_index%3D96%26tsm%3D2" target="_blank">
-          Le Creuset Signature braad-/stoofpan Ø20 cm in chambray/blauw (€265.00)
-        </a>
-        </li>
-       <li data-category="kitchen" data-subcategory="pots and pans" data-price="78.00">
-        <a href="https://www.debijenkorf.nl/le-creuset-stoompan-24-cm-6577090507-657709050700000?query=fh_location%3D%2F%2Fcatalog01%2Fnl_NL%2Fbrand%3E%7Ble_creuset%7D%26fh_start_index%3D144%26tsm%3D2" target="_blank">
-          Le Creuset Stoompan 24 cm (€78.00)
-        </a>
-        </li>
-      
-      <!-- Home Accessories -->
-      <li data-category="home" data-subcategory="vases" data-price="99.99">
-        <a href="https://www.debijenkorf.nl/ferm-living-dedali-vaas-25-cm-8305090571-830509057121090?query=fh_location%3D%2F%2Fcatalog01%2Fnl_NL%2Fbrand%3E%7Bferm_living%7D%26fh_start_index%3D144%26tsm%3D2/" target="_blank">
-          FERM Living vaas (€99.99)
-        </a>
-      </li>
-      <li data-category="home" data-subcategory="other" data-price="34.99">
-        <a href="https://www.westwing.nl/boekensteunen-celina-set-van-2-162334.html" target="_blank">
-          Boekensteunen Celina, set van 2 (€34.99)
-        </a>
-      </li>
-      <li data-category="home" data-subcategory="other" data-price="28.99">
-        <a href="https://www.westwing.nl/brillendoos-premium-155196.html" target="_blank">
-          Brillendoos Premium (€28.99)
-        </a>
-      </li>
+  <ul id="itemList">
+    <!-- Books -->
+    <li data-category="books" data-subcategory="fiction" data-price="9.49">
+      <a href="https://www.bol.com/nl/nl/p/the-seven-year-slip/9300000138764320/" target="_blank">The Seven Year Slip – Fiction (€9.49)</a>
+      <button class="claim-btn">Claim</button>
+    </li>
+    <li data-category="books" data-subcategory="nonfiction" data-price="22.00">
+      <a href="https://www.debijenkorf.nl/wmf-nootmuskaatmolen-19-cm-3059090541-305909054100000" target="_blank">Nootmuskaatmolen Book (€22)</a>
+      <button class="claim-btn">Claim</button>
+    </li>
 
-      <!-- Personal Care -->
-      <li data-category="personal" data-subcategory="fragrances" data-price="240.00">
-        <a href="https://www.debijenkorf.nl/matiere-premiere-vanilla-powder-eau-de-parfum-6067090014-606709001426100" target="_blank">
-          Vanilla Powder Eau De Parfum (€240.00)
-        </a>
-      </li>
-     
-      <!-- Travel -->
-     <li data-category="travel" data-subcategory="suitcases" data-price="750.00">
-        <a href="https://www.rimowa.com/fi/en/luggage/colour/slate/cabin/83253831.html" target="_blank">
-          Rimowa Essential Cabin (€750.00)
-        </a>
-      </li>
-     <li data-category="travel" data-subcategory="suitcases" data-price="940.00">
-        <a href="https://www.rimowa.com/fi/en/luggage/colour/grey/check-in-l/83273831.html" target="_blank">
-          Rimowa Essential Check-In L (€940.00)
-        </a>
-      </li>
-    </ul>
-  </section>  
+    <!-- Kitchen -->
+    <li data-category="kitchen" data-subcategory="utensils" data-price="9.95">
+      <a href="https://www.debijenkorf.nl/patisse-prima-line-truffel-en-chocolade-schaaf-6863090130-686309013000000" target="_blank">Chocolate Shaver (€9.95)</a>
+      <button class="claim-btn">Claim</button>
+    </li>
+
+    <!-- Home Accessories -->
+    <li data-category="home" data-subcategory="decor" data-price="69.95">
+      <a href="https://barista-essentials.nl/ultimate-brew-giftset/" target="_blank">Ultimate Brew Giftset (€69.95)</a>
+      <button class="claim-btn">Claim</button>
+    </li>
+
+    <!-- Personal Care -->
+    <li data-category="personal" data-subcategory="fragrance" data-price="240.00">
+      <a href="https://www.debijenkorf.nl/matiere-premiere-vanilla-powder-eau-de-parfum-6067090014-606709001426100" target="_blank">Vanilla Powder Eau De Parfum (€240)</a>
+      <button class="claim-btn">Claim</button>
+    </li>
+  </ul>
 
   <footer>
-    &copy; 2025 Sarah's Wishlist — All rights reserved
+    Made with care 💙💜
   </footer>
 
   <script>
     const categoryFilter = document.getElementById('categoryFilter');
-    const subcategoryFilter = document.getElementById('subcategoryFilter');
     const priceFilter = document.getElementById('priceFilter');
     const itemList = document.getElementById('itemList');
     const toggleBtn = document.getElementById('toggleDarkMode');
 
-    const subcategories = {
-      books: ['fiction', 'non-fiction', 'historical fiction'],
-      kitchen: ['utensils', 'teas and coffees', 'baking', 'pots and pans'],
-      home: ['vases', 'other'],
-      personal: ['fragrances', 'other'],
-      travel: ['suitcases']
-    };
+    function filterItems() {
+      const category = categoryFilter.value;
+      const price = priceFilter.value;
+      const items = itemList.querySelectorAll('li');
 
-    // Update subcategory options based on category
-    categoryFilter.addEventListener('change', () => {
-      const selectedCategory = categoryFilter.value;
-      subcategoryFilter.innerHTML = '<option value="all">All</option>';
+      items.forEach(item => {
+        const itemCategory = item.getAttribute('data-category');
+        const itemPrice = parseFloat(item.getAttribute('data-price'));
+        let show = true;
 
-      if (subcategories[selectedCategory]) {
-        subcategories[selectedCategory].forEach(sub => {
-          const opt = document.createElement('option');
-          opt.value = sub;
-          opt.textContent = sub.charAt(0).toUpperCase() + sub.slice(1);
-          subcategoryFilter.appendChild(opt);
-        });
-      }
+        if (category !== 'all' && itemCategory !== category) {
+          show = false;
+        }
 
-      filterItems();
-    });
+        if (price !== 'all') {
+          if (price === 'under20' && !(itemPrice < 20)) show = false;
+          if (price === '20to50' && !(itemPrice >= 20 && itemPrice <= 50)) show = false;
+          if (price === 'over50' && !(itemPrice > 50)) show = false;
+        }
 
-    subcategoryFilter.addEventListener('change', filterItems);
+        item.classList.toggle('hidden', !show);
+      });
+    }
+
+    categoryFilter.addEventListener('change', filterItems);
     priceFilter.addEventListener('change', filterItems);
 
     toggleBtn.addEventListener('click', () => {
       document.body.classList.toggle('dark');
     });
 
-    function filterItems() {
-      const category = categoryFilter.value;
-      const subcategory = subcategoryFilter.value;
-      const price = priceFilter.value;
+    // Claim toggle logic
+    function initializeClaimButtons() {
+      const buttons = document.querySelectorAll('.claim-btn');
 
-      const items = itemList.querySelectorAll('li');
+      buttons.forEach(button => {
+        const itemLink = button.parentElement.querySelector('a');
+        const itemKey = 'claimed-' + itemLink.href;
 
-      items.forEach(item => {
-        const itemCategory = item.getAttribute('data-category');
-        const itemSub = item.getAttribute('data-subcategory');
-        const itemPrice = parseFloat(item.getAttribute('data-price'));
+        // Load state
+        if (localStorage.getItem(itemKey) === 'claimed') {
+          button.textContent = 'Claimed';
+          button.classList.add('claimed');
+        } else {
+          button.textContent = 'Claim';
+          button.classList.remove('claimed');
+        }
 
-        let visible = true;
-
-        if (category !== 'all' && itemCategory !== category) visible = false;
-        if (subcategory !== 'all' && itemSub !== subcategory) visible = false;
-
-        if (price === 'under20' && itemPrice >= 20) visible = false;
-        if (price === '20to50' && (itemPrice < 20 || itemPrice > 50)) visible = false;
-        if (price === 'over50' && itemPrice <= 50) visible = false;
-
-        item.classList.toggle('hidden', !visible);
+        button.addEventListener('click', () => {
+          if (button.classList.contains('claimed')) {
+            // Unclaim
+            button.textContent = 'Claim';
+            button.classList.remove('claimed');
+            localStorage.removeItem(itemKey);
+          } else {
+            // Claim
+            button.textContent = 'Claimed';
+            button.classList.add('claimed');
+            localStorage.setItem(itemKey, 'claimed');
+          }
+        });
       });
     }
-
-    filterItems();
-
-// Claim toggle logic with localStorage persistence, improved:
-function initializeClaimButtons() {
-  const buttons = document.querySelectorAll('.claim-btn');
-
-  buttons.forEach(button => {
-    // Use a unique identifier per item (e.g. URL or text) as key:
-    const itemLink = button.parentElement.querySelector('a');
-    const itemKey = 'claimed-' + itemLink.href;
-
-    // Load claim state
-    if (localStorage.getItem(itemKey) === 'claimed') {
-      button.textContent = 'Claimed';
-      button.classList.add('claimed');
-    } else {
-      button.textContent = 'Claim';
-      button.classList.remove('claimed');
-    }
-
-    button.addEventListener('click', () => {
-      if (button.classList.contains('claimed')) {
-        // Unclaim
-        button.textContent = 'Claim';
-        button.classList.remove('claimed');
-        localStorage.removeItem(itemKey);
-      } else {
-        // Claim
-        button.textContent = 'Claimed';
-        button.classList.add('claimed');
-        localStorage.setItem(itemKey, 'claimed');
-      }
-    });
-  });
-}
 
     initializeClaimButtons();
   </script>
